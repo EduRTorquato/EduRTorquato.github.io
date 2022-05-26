@@ -1,0 +1,100 @@
+<div class="col-6">
+
+    <p-toolbar>
+        <div class="p-toolbar-group-left">
+            <p-button type="text" (click)="display = true" icon="pi pi-bars"></p-button>
+        </div>
+
+        <h1>{{'school.school' | transloco}}</h1>
+
+        <div class="p-toolbar-group-right">
+            <p-button icon="pi pi-plus" (click)="showModalDialog()"></p-button>
+        </div>
+    </p-toolbar>
+
+    <p-dialog header="{{ !isEdit && !isView ? 'Criar' : !isEdit && isView ? 'Ver' : 'Editar'}}" [(visible)]="displayModal" [modal]="true" [style]="{width: '30vw'}">
+        <form [formGroup]="escolaForm">
+            <div class="sizes">
+                <div style="padding:10px;">
+                    <p-multiSelect [options]="turma" [style]="{'minWidth':'100%'}" placeholder="{{'school.classes' | transloco}}" formControlName="turma" optionLabel="nome"></p-multiSelect>
+                </div>
+                <div style="padding:10px;">
+                    <input style="width: 100%;" formControlName="nome" type="text" placeholder="{{'school.name' | transloco}}" pInputText />
+                </div>
+                <div style="padding:10px;">
+                    <input style="width: 100%;" type="text" formControlName="endereco" placeholder="{{'school.adress' | transloco}}"
+                        pInputText />
+                </div>
+                <div style="padding:10px;">
+                    <input style="width: 100%;" type="text" formControlName="cnpj" placeholder="{{'school.cnpj' | transloco}}" pInputText />
+                </div>
+            </div>
+        </form>
+        <ng-template pTemplate="footer">
+
+            <p-button icon="pi pi-check" *ngIf="!isEdit && !isView" [disabled]="escolaForm.invalid" (click)="postEscola()" label="{{'school.school-buttons.create' | transloco}}">
+            </p-button>
+
+            <p-button icon="pi pi-check" *ngIf="isEdit && !isView" [disabled]="escolaForm.invalid" (click)="putEscola()" label="{{'school.school-buttons.edit' | transloco}}">
+            </p-button>
+
+        </ng-template>
+        <!-- <p>Form Status: {{ escolaForm.status }}</p>
+        <p>Form value: {{ escolaForm.value | json }}</p> -->
+    </p-dialog>
+    <p-confirmDialog header="{{'school.confirmation' | transloco}}" rejectButtonStyleClass="p-button-danger" acceptLabel="{{'school.yes' | transloco}}" rejectLabel="{{'school.no' | transloco}}" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+    <p-toast position="top-right"></p-toast>
+    <p-table [value]="escola">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>{{'school.name' | transloco}}</th>
+                <th>{{'school.adress' | transloco}}</th>
+                <th>{{'school.cnpj' | transloco}}</th>
+                <th>{{'school.classes' | transloco}}</th>
+                <th>{{'school.watch' | transloco}}</th>
+                <th>{{'school.edit' | transloco}}</th>
+                <th>{{'school.delete' | transloco}}</th>
+                <!-- <th>{{'main-table.name' | transloco}}</th> -->
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-escolas>
+            <tr>
+                <td>{{escolas.nome}}</td>
+                <td>{{escolas.endereco}}</td>
+                <td>{{escolas.cnpj}}</td>
+                <td><p-dropdown [options]=escolas.turma [readonly]="false" optionLabel="nome"></p-dropdown></td>
+                <td>
+                    <p-button icon="pi pi-eye" (click)="watchSchool(escolas)" styleClass="p-button-primary"></p-button>
+                </td>
+                <td>
+                    <p-button icon="pi pi-pencil" (click)="editForm(escolas)" styleClass="p-button-success"></p-button>
+                </td>
+                <td>
+                    <p-button icon="pi pi-times" (click)="deleteEscola(escolas)" styleClass="p-button-danger"></p-button>
+                </td>
+                <!-- <td>{{escolas.turma.nome}}</td> -->
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <p-sidebar [(visible)]="display" class="grid" [style]="{width:'30em'}">
+        <div class="grid">
+            <h1 class="justify-content: center">{{'menu.menu' | transloco}}</h1>
+            <div style="padding: 10px;">
+                <button style="width: 50%;" class="button" pButton type="button" icon="pi pi-user" routerLink="/turmas"
+                    label="{{'menu.classes' | transloco}}" class="p-button-primary"></button>
+            </div>
+            <hr>
+            <div style="padding:10px;">
+                <button style="width: 50%;" pButton type="button" icon="pi pi-home" routerLink="/escola" label="{{'menu.school' | transloco}}"
+                    class="p-button-primary"></button>
+            </div>
+            <hr>
+            <div style="padding:10px;">
+                <button style="width: 50%;" pButton type="button" icon="pi pi-caret-left" routerLink="/login"
+                    label="{{'menu.logout' | transloco}}" class="p-button-danger"></button>
+            </div>
+        </div>
+    </p-sidebar>
+
+</div>
