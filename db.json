@@ -1,4 +1,49 @@
 {
-  "escolas": [],
-  "turmas": []
+  "escolas": [
+    {
+      "nome": "Nome",
+      "endereco": "endereço",
+      "cnpj": "123456789",
+      "turma": [
+        {
+          "nome": "Turma do labs",
+          "horario": "11:00 - 14:00",
+          "id": 1
+        },
+        {
+          "nome": "Teste",
+          "horario": "11:00 - 15:00",
+          "id": 2
+        },
+        {
+          "nome": "Teste do labs",
+          "horario": "12:00 - 15:00",
+          "id": 3
+        }
+      ],
+      "id": 1
+    }
+  ],
+  "turmas": [
+    {
+      "nome": "Turma do labs",
+      "horario": "11:00 - 14:00",
+      "id": 1
+    },
+    {
+      "nome": "Teste",
+      "horario": "11:00 - 15:00",
+      "id": 2
+    },
+    {
+      "nome": "Teste do labs",
+      "horario": "12:00 - 15:00",
+      "id": 3
+    },
+    {
+      "nome": "Teste",
+      "horario": "11:00 - 13:00",
+      "id": 4
+    }
+  ]
 }

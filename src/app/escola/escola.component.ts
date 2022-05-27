@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { TRISTATECHECKBOX_VALUE_ACCESSOR } from 'primeng/tristatecheckbox';
 import { Escola } from 'src/models/escola';
@@ -26,7 +27,8 @@ export class EscolaComponent implements OnInit {
   constructor(private escolaService: EscolaService,
     private turmaService: TurmaService,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService) { }
+    private confirmationService: ConfirmationService,
+    private router: Router) { }
 
   ngOnInit(): void {
 
@@ -52,6 +54,7 @@ export class EscolaComponent implements OnInit {
 
 
   editForm(data: Escola) {
+    this.escolaForm.enable()
     this.isEdit = true;
     this.isView = false;
     this.displayModal = true
@@ -119,6 +122,14 @@ export class EscolaComponent implements OnInit {
     )
   }
 
+  sair() {
+    this.confirmationService.confirm({
+      message: 'Deseja encerrar a sessão?',
+      accept: () => { 
+        this.router.navigate(['login'])
+      }
+    })
+  }
 
 
 
