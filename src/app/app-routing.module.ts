@@ -5,7 +5,6 @@ import { LoginComponent } from './login/login.component';
 import { TurmaComponent } from './turma/turma.component';
 const routes: Routes = [
   {path: '', component: LoginComponent},
-  {path: '#', component: LoginComponent},
   {path: 'login', component: LoginComponent},
   {path: 'escola', component: EscolaComponent},
   {path: 'turmas', component: TurmaComponent},
